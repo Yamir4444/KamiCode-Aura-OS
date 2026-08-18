@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yamir Vera | Data Science & Software Architecture</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              900: '#3b0764',
+              950: '#1e053a',
+            },
+            cyan: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #06010d;
+      color: #f3f4f6;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+    }
+    .neon-border {
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.15);
+    }
+    .neon-border:hover {
+      border-color: rgba(168, 85, 247, 0.7);
+      box-shadow: 0 0 35px rgba(168, 85, 247, 0.3);
+    }
+    .glow-text {
+      text-shadow: 0 0 20px rgba(192, 132, 252, 0.5);
+    }
+    .glow-cyan {
+      text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #06010d; }
+    ::-webkit-scrollbar-thumb { background: #3b0764; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #7e22ce; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-purple-500 selection:text-white">
+
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="sticky top-0 z-50 bg-[#06010d]/80 backdrop-blur-xl border-b border-purple-900/40">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 p-0.5 shadow-lg shadow-purple-900/40 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-[#0a0214] rounded-2xl flex items-center justify-center font-display font-extrabold text-purple-300 text-lg">
+            YV
+          </div>
+        </div>
+        <div>
+          <span class="font-display font-bold text-white text-lg tracking-tight group-hover:text-purple-300 transition-colors">
+            Yamir Vera
+          </span>
+          <span class="block text-[10px] font-mono text-purple-400">UV Xalapa • Data Science & AI</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-purple-400 transition">Sobre mí</a>
+        <a href="#skills" class="hover:text-purple-400 transition">Stack Técnico</a>
+        <a href="#projects" class="hover:text-purple-400 transition">Proyectos</a>
+        <a href="#arcade" class="text-cyan-400 hover:text-cyan-300 transition font-mono">🎮 Retro Arcade</a>
+        <a href="https://github.com/yamirvera" target="_blank" rel="noopener noreferrer" 
+           class="px-4 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/40 font-mono text-xs font-bold transition-all shadow-md">
+          GitHub ↗
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main class="max-w-6xl mx-auto px-6 py-12 sm:py-20 space-y-24 flex-1">
+    
+    <section class="space-y-6 pt-4 sm:pt-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-10">
+      <div class="space-y-6 max-w-2xl">
+        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Disponible para Prácticas & Roles Jr / Mid • 2026</span>
+        </div>
+        
+        <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+          Transformo datos caóticos en <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent glow-text">código quirúrgico</span> y sistemas inteligentes.
+        </h1>
+
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-sans font-light">
+          Estudiante de <strong>Ciencia de Datos en la Universidad Veracruzana (UV Xalapa)</strong>. Obsesionado con el código limpio, modelos predictivos, agentes autónomos y videojuegos retro construidos desde cero. 
+        </p>
+
+        <!-- Cinephile & Personal Quote Badge -->
+        <div class="p-4 rounded-2xl bg-purple-950/40 border border-purple-500/20 text-xs font-mono text-slate-300 space-y-1">
+          <div class="text-purple-400 font-bold flex items-center gap-1.5">
+            <span>🎬 Filosofía de Desarrollo:</span>
+          </div>
+          <p class="text-slate-400 italic">
+            "No creo en soluciones mágicas ni código inflado por IA genérica. Construyo con precisión matemática, arquitectura modular pura y un toque de cinismo elegante."
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2 justify-center sm:justify-start">
+          <a href="#projects" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm shadow-xl shadow-purple-900/50 transition-all transform hover:-translate-y-0.5">
+            Ver Proyectos Clave
+          </a>
+          <a href="#arcade" class="px-6 py-3.5 rounded-2xl bg-[#0a0214] hover:bg-purple-950/60 text-cyan-300 border border-cyan-500/40 font-mono text-sm font-bold transition-all">
+            🎮 Jugar en el Retro Arcade
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Cyber Badge Card -->
+      <div class="w-full sm:w-80 p-6 rounded-3xl bg-[#0d031c] neon-border space-y-4 text-left">
+        <div class="flex justify-between items-center border-b border-purple-900/60 pb-3">
+          <span class="text-xs font-mono text-purple-400">DEV IDENTITY MATRIX</span>
+          <span class="text-xs font-mono text-emerald-400">● ACTIVO</span>
+        </div>
+        <div class="space-y-2 text-xs font-mono">
+          <div class="flex justify-between"><span class="text-slate-400">Ubicación:</span> <span class="text-slate-200">Xalapa, Veracruz</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Universidad:</span> <span class="text-purple-300 font-bold">UV Xalapa</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Carrera:</span> <span class="text-slate-200">Ciencia de Datos</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Especialidad:</span> <span class="text-cyan-300">Modelos Predictivos & IA</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Color Signature:</span> <span class="text-purple-400 font-bold">#A855F7 Ultraviolet</span></div>
+        </div>
+        <div class="pt-2 border-t border-purple-900/60 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+          <span>Inspiración:</span>
+          <span class="text-pink-400">Cine, Rick & Morty, Breaking Bad</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL STACK SECTION -->
+    <section id="skills" class="space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-purple-900/40 pb-4">
+        <div>
+          <span class="text-xs font-mono text-purple-400 uppercase tracking-widest">HABILIDADES Y ARSENAL</span>
+          <h2 class="font-display text-3xl font-extrabold text-white mt-1">Stack Tecnológico Quirúrgico</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">Sin bibliotecas infladas • Alto rendimiento</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Data Science & AI -->
+        <div class="p-6 rounded-3xl bg-[#0a0214] neon-border space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-purple-950 flex items-center justify-center text-2xl border border-purple-500/30">
+            🐍
+          </div>
+          <h3 class="text-lg font-bold text-white">Data Science & Machine Learning</h3>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            Modelos de regresión multivariable, clustering de cohortes, análisis exploratorio estadístico y optimización matemática.
+          </p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-purple-300">
+            <span class="bg-purple-950/80 px-2.5 py-1 rounded-lg border border-purple-800">Python 3.12</span>
+            <span class="bg-purple-950/80 px-2.5 py-1 rounded-lg border border-purple-800">Pandas / NumPy</span>
+            <span class="bg-purple-950/80 px-2.5 py-1 rounded-lg border border-purple-800">Scikit-Learn</span>
+            <span class="bg-purple-950/80 px-2.5 py-1 rounded-lg border border-purple-800">Gemini LLM API</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Frontend & Interactive Graphics -->
+        <div class="p-6 rounded-3xl bg-[#0a0214] neon-border space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-950 flex items-center justify-center text-2xl border border-cyan-500/30">
+            ⚡
+          </div>
+          <h3 class="text-lg font-bold text-white">Frontend, Canvas & Realtime</h3>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            Desarrollo reactivo de alto impacto visual, animaciones fluidas a 60 FPS en HTML5 Canvas y motores de sonido Web Audio API.
+          </p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-cyan-300">
+            <span class="bg-cyan-950/80 px-2.5 py-1 rounded-lg border border-cyan-800">TypeScript / JS</span>
+            <span class="bg-cyan-950/80 px-2.5 py-1 rounded-lg border border-cyan-800">React 18 / Vite</span>
+            <span class="bg-cyan-950/80 px-2.5 py-1 rounded-lg border border-cyan-800">Tailwind CSS</span>
+            <span class="bg-cyan-950/80 px-2.5 py-1 rounded-lg border border-cyan-800">HTML5 Canvas 2D</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Backend & Architecture -->
+        <div class="p-6 rounded-3xl bg-[#0a0214] neon-border space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-pink-950 flex items-center justify-center text-2xl border border-pink-500/30">
+            🏛️
+          </div>
+          <h3 class="text-lg font-bold text-white">Backend & Arquitectura de Software</h3>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            Microservicios REST, máquinas de estados finitos (FSM), persistencia local/cloud y pipelines de despliegue automatizados.
+          </p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-pink-300">
+            <span class="bg-pink-950/80 px-2.5 py-1 rounded-lg border border-pink-800">Node.js / Express</span>
+            <span class="bg-pink-950/80 px-2.5 py-1 rounded-lg border border-pink-800">Git / GitHub CI</span>
+            <span class="bg-pink-950/80 px-2.5 py-1 rounded-lg border border-pink-800">REST & WebSockets</span>
+            <span class="bg-pink-950/80 px-2.5 py-1 rounded-lg border border-pink-800">FSM State Machines</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SHOWCASE -->
+    <section id="projects" class="space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-purple-900/40 pb-4">
+        <div>
+          <span class="text-xs font-mono text-purple-400 uppercase tracking-widest">PORTAFOLIO DE PROYECTOS</span>
+          <h2 class="font-display text-3xl font-extrabold text-white mt-1">Sistemas Reales en Producción</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">Verificables en GitHub</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Project 1: Aura AI Cognitive OS -->
+        <div class="p-6 rounded-3xl bg-[#0a0214] neon-border space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center text-xs font-mono">
+              <span class="text-purple-400 font-bold">PROYECTO INSIGNIA</span>
+              <span class="text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">51,000+ Líneas Reales</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Aura AI v3.01 — Sistema Operativo Cognitivo Autónomo</h3>
+            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+              Asistente cognitivo estilo Jarvis dotado de motor neuroquímico (dopamina, serotonina, cortisol), RAG de memoria vectorial, pool dinámico de 20 llaves de API Gemini con auto-recuperación de cuota y diagnósticos en tiempo real.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-purple-900/40 flex justify-between items-center text-xs font-mono">
+            <span class="text-purple-300">TypeScript • Node • Gemini</span>
+            <span class="text-slate-400">Full-Stack Architecture</span>
+          </div>
+        </div>
+
+        <!-- Project 2: Retro Arcade Canvas Engine -->
+        <div class="p-6 rounded-3xl bg-[#0a0214] neon-border space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center text-xs font-mono">
+              <span class="text-cyan-400 font-bold">ARCADE EN VIVO</span>
+              <span class="text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">HTML5 Canvas 2D</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Retro Arcade Engine: Tetris & Galaga Void</h3>
+            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+              Videojuegos retro arcade programados en JavaScript nativo y Canvas puro, con sintetizador de audio en tiempo real (Web Audio API), detección de colisiones matriciales a 60 FPS y controles adaptables para smartphones.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-purple-900/40 flex justify-between items-center text-xs font-mono">
+            <span class="text-cyan-300">JavaScript • Canvas 2D • WebAudio</span>
+            <a href="#arcade" class="text-cyan-400 hover:underline font-bold">Probar abajo ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMBEDDED PLAYABLE RETRO ARCADE SECTION -->
+    <section id="arcade" class="p-8 rounded-3xl bg-[#0b0318] border border-purple-500/50 shadow-2xl space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-purple-900/60 pb-4">
+        <div>
+          <div class="flex items-center space-x-2 text-purple-400 font-mono text-xs">
+            <span>🕹️ DEMOSTRACIÓN EN VIVO</span>
+            <span>•</span>
+            <span class="text-cyan-400 font-bold">EJECUCIÓN NATIVA EN NAVEGADOR</span>
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white mt-1">
+            Mini Arcade Retro: Tetris Cyber-Purple
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">¡Juega directamente aquí con tu teclado o botones táctiles!</span>
+      </div>
+
+      <div class="w-full max-w-lg mx-auto rounded-2xl overflow-hidden border border-purple-500/40 shadow-[0_0_35px_rgba(168,85,247,0.25)] h-[440px] bg-black">
+        <iframe srcdoc="<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#080112; color:#c084fc; font-family:monospace; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; overflow:hidden; }
+    canvas { background:#020005; border:2px solid #7e22ce; border-radius:8px; box-shadow:0 0 15px rgba(126,34,206,0.4); }
+    .hud { display:flex; gap:12px; margin-top:8px; font-size:0.75rem; }
+    .ctrls { display:flex; gap:6px; margin-top:8px; }
+    .btn { background:#1e0b3d; border:1px solid #a855f7; color:#f3e8ff; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:bold; cursor:pointer; }
+    .btn:active { background:#9333ea; }
+  </style>
+</head>
+<body>
+  <canvas id="c" width="180" height="340"></canvas>
+  <div class="hud">SCORE: <span id="s" style="color:#00f0ff;">0</span> | LÍNEAS: <span id="l">0</span></div>
+  <div class="ctrls">
+    <button class="btn" id="l-btn">⬅️</button>
+    <button class="btn" id="r-btn">🔄</button>
+    <button class="btn" id="rg-btn">➡️</button>
+    <button class="btn" id="d-btn">⬇️</button>
+  </div>
+  <script>
+    const c = document.getElementById('c'), ctx = c.getContext('2d'); ctx.scale(17, 17);
+    const arena = Array.from({length:20},()=>new Array(10).fill(0));
+    const colors = [null,'#a855f7','#06b6d4','#ec4899','#f59e0b','#10b981','#3b82f6'];
+    const p = {pos:{x:0,y:0},matrix:null,score:0,lines:0};
+    function createPiece(t){
+      if(t==='T')return[[0,1,0],[1,1,1],[0,0,0]];
+      if(t==='O')return[[2,2],[2,2]];
+      if(t==='L')return[[0,0,3],[3,3,3],[0,0,0]];
+      if(t==='I')return[[0,4,0,0],[0,4,0,0],[0,4,0,0],[0,4,0,0]];
+      return[[5,5,0],[0,5,5],[0,0,0]];
+    }
+    function draw(){
+      ctx.fillStyle='#020005'; ctx.fillRect(0,0,c.width,c.height);
+      arena.forEach((r,y)=>r.forEach((v,x)=>{if(v){ctx.fillStyle=colors[v];ctx.fillRect(x,y,1,1);}}));
+      if(p.matrix) p.matrix.forEach((r,y)=>r.forEach((v,x)=>{if(v){ctx.fillStyle=colors[v];ctx.fillRect(x+p.pos.x,y+p.pos.y,1,1);}}));
+    }
+    function collide(a,p){
+      const[m,o]=[p.matrix,p.pos];
+      for(let y=0;y<m.length;++y)for(let x=0;x<m[y].length;++x)if(m[y][x]!==0&&(a[y+o.y]&&a[y+o.y][x+o.x])!==0)return true;
+      return false;
+    }
+    function merge(a,p){p.matrix.forEach((r,y)=>r.forEach((v,x)=>{if(v)a[y+p.pos.y][x+p.pos.x]=v;}));}
+    function sweep(){
+      outer:for(let y=arena.length-1;y>0;--y){
+        for(let x=0;x<arena[y].length;++x)if(arena[y][x]===0)continue outer;
+        arena.unshift(arena.splice(y,1)[0].fill(0)); ++y; p.score+=100; p.lines++;
+      }
+      document.getElementById('s').innerText=p.score; document.getElementById('l').innerText=p.lines;
+    }
+    function drop(){
+      p.pos.y++; if(collide(arena,p)){p.pos.y--;merge(arena,p);reset();sweep();} dropCount=0;
+    }
+    function move(d){ p.pos.x+=d; if(collide(arena,p)) p.pos.x-=d; }
+    function rot(){
+      for(let y=0;y<p.matrix.length;++y)for(let x=0;x<y;++x)[p.matrix[x][y],p.matrix[y][x]]=[p.matrix[y][x],p.matrix[x][y]];
+      p.matrix.forEach(r=>r.reverse());
+      if(collide(arena,p)) p.matrix.reverse();
+    }
+    function reset(){
+      p.matrix=createPiece('TOLIZ'[Math.random()*5|0]); p.pos.y=0; p.pos.x=3;
+      if(collide(arena,p)){arena.forEach(r=>r.fill(0));p.score=0;p.lines=0;}
+    }
+    let dropCount=0, last=0;
+    function update(t=0){
+      dropCount+=t-last; last=t;
+      if(dropCount>700) drop();
+      draw(); requestAnimationFrame(update);
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.keyCode===37)move(-1);if(e.keyCode===39)move(1);if(e.keyCode===40)drop();if(e.keyCode===38)rot();
+    });
+    document.getElementById('l-btn').onclick=()=>move(-1);
+    document.getElementById('rg-btn').onclick=()=>move(1);
+    document.getElementById('r-btn').onclick=()=>rot();
+    document.getElementById('d-btn').onclick=()=>drop();
+    reset(); update();
+  </script>
+</body>
+</html>" class="w-full h-full border-0"></iframe>
+      </div>
+    </section>
+
+    <!-- CONTACT & GITHUB FOOTER -->
+    <footer class="pt-12 border-t border-purple-900/40 text-center space-y-6">
+      <div class="space-y-2">
+        <h3 class="font-display text-2xl font-bold text-white">¿Listo para construir software extraordinario?</h3>
+        <p class="text-sm text-slate-400 font-sans">
+          Contáctame para proyectos, vacantes de Ciencia de Datos o desarrollo de IA.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-mono">
+        <a href="mailto:eduardobolt4444@gmail.com" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition shadow-lg shadow-purple-900/40">
+          ✉️ eduardobolt4444@gmail.com
+        </a>
+        <a href="https://github.com/yamirvera" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-[#0a0214] hover:bg-purple-950 text-purple-300 border border-purple-500/30 transition">
+          🐙 github.com/yamirvera
+        </a>
+      </div>
+
+      <div class="pt-8 text-xs text-slate-600 font-mono">
+        © 2026 Yamir Vera • Universidad Veracruzana (UV Xalapa) • Diseñado y compilado con Aura AI Engine
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>

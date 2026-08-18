@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galaga Void Defender | Yamir Vera</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #030008; color: #38bdf8; font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
+    h1 { font-size: 1rem; color: #a855f7; margin-bottom: 6px; letter-spacing: 2px; }
+    canvas { background: #020005; border: 2px solid #06b6d4; border-radius: 12px; box-shadow: 0 0 25px rgba(6,182,212,0.3); }
+    .hud { display: flex; justify-content: space-between; width: 360px; margin-top: 8px; font-size: 0.85rem; font-weight: bold; }
+    .hud span { color: #f43f5e; }
+    .controls { display: flex; gap: 8px; margin-top: 10px; }
+    .btn { background: #082f49; border: 1px solid #0284c7; color: #bae6fd; padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+    .btn:active { background: #0284c7; color: #000; }
+  </style>
+</head>
+<body>
+  <h1>🚀 GALAGA VOID DEFENDER</h1>
+  <canvas id="canvas" width="360" height="480"></canvas>
+  <div class="hud">
+    <div>PUNTOS: <span id="score">0</span></div>
+    <div>VIDAS: <span id="lives">❤️❤️❤️</span></div>
+  </div>
+  <div class="controls">
+    <button class="btn" id="left">⬅️ Izq</button>
+    <button class="btn" id="fire" style="background:#701a75; border-color:#d946ef; color:#fff;">🔥 Fuego</button>
+    <button class="btn" id="right">➡️ Der</button>
+  </div>
+  <script>
+    const canvas = document.getElementById('canvas'), ctx = canvas.getContext('2d');
+    let score = 0, lives = 3, gameOver = false;
+    const player = { x: 160, y: 430, w: 36, h: 24, speed: 6 };
+    let bullets = [], enemies = [], particles = [], keys = {};
+
+    function spawnEnemies() {
+      enemies = [];
+      for(let r=0; r<4; r++) {
+        for(let c=0; c<7; c++) {
+          enemies.push({ x: 40 + c * 42, y: 30 + r * 32, w: 26, h: 20, alive: true, dir: 1, color: r === 0 ? '#f43f5e' : (r === 1 ? '#ec4899' : '#06b6d4') });
+        }
+      }
+    }
+    spawnEnemies();
+
+    function shoot() {
+      if(gameOver) { gameOver = false; score = 0; lives = 3; spawnEnemies(); return; }
+      bullets.push({ x: player.x + player.w/2 - 2, y: player.y, w: 4, h: 10 });
+    }
+
+    window.addEventListener('keydown', e => { keys[e.code] = true; if(e.code === 'Space') shoot(); });
+    window.addEventListener('keyup', e => { keys[e.code] = false; });
+    document.getElementById('left').onmousedown = () => keys['ArrowLeft'] = true;
+    document.getElementById('left').onmouseup = () => keys['ArrowLeft'] = false;
+    document.getElementById('right').onmousedown = () => keys['ArrowRight'] = true;
+    document.getElementById('right').onmouseup = () => keys['ArrowRight'] = false;
+    document.getElementById('fire').onclick = shoot;
+
+    let enemySpeed = 0.8, enemyStepDown = 0;
+    function update() {
+      if(keys['ArrowLeft'] || keys['KeyA']) player.x = Math.max(10, player.x - player.speed);
+      if(keys['ArrowRight'] || keys['KeyD']) player.x = Math.min(canvas.width - player.w - 10, player.x + player.speed);
+
+      bullets.forEach((b, i) => {
+        b.y -= 8;
+        if(b.y < 0) bullets.splice(i, 1);
+      });
+
+      let hitEdge = false;
+      enemies.forEach(e => {
+        if(!e.alive) return;
+        e.x += enemySpeed;
+        if(e.x < 10 || e.x > canvas.width - e.w - 10) hitEdge = true;
+
+        // Collision with bullets
+        bullets.forEach((b, bi) => {
+          if(b.x > e.x && b.x < e.x + e.w && b.y > e.y && b.y < e.y + e.h) {
+            e.alive = false;
+            bullets.splice(bi, 1);
+            score += 150;
+            document.getElementById('score').innerText = score;
+            for(let p=0; p<8; p++) particles.push({ x: e.x+10, y: e.y+10, vx: (Math.random()-0.5)*4, vy: (Math.random()-0.5)*4, life: 20, color: e.color });
+          }
+        });
+      });
+
+      if(hitEdge) {
+        enemySpeed = -enemySpeed * 1.05;
+        enemies.forEach(e => { if(e.alive) e.y += 12; });
+      }
+
+      particles.forEach((p, i) => {
+        p.x += p.vx; p.y += p.vy; p.life--;
+        if(p.life <= 0) particles.splice(i, 1);
+      });
+
+      if(enemies.every(e => !e.alive)) {
+        spawnEnemies();
+        enemySpeed = Math.abs(enemySpeed) + 0.3;
+      }
+    }
+
+    function render() {
+      ctx.fillStyle = '#020005';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Stars
+      ctx.fillStyle = '#ffffff';
+      for(let s=0; s<20; s++) {
+        ctx.fillRect((s*47 + Date.now()*0.02) % canvas.width, (s*83 + Date.now()*0.05) % canvas.height, 1.5, 1.5);
+      }
+
+      // Player Ship
+      ctx.fillStyle = '#a855f7';
+      ctx.beginPath();
+      ctx.moveTo(player.x + player.w/2, player.y);
+      ctx.lineTo(player.x + player.w, player.y + player.h);
+      ctx.lineTo(player.x + player.w/2, player.y + player.h - 6);
+      ctx.lineTo(player.x, player.y + player.h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = '#06b6d4';
+      ctx.fillRect(player.x + player.w/2 - 2, player.y + 4, 4, 10);
+
+      // Bullets
+      ctx.fillStyle = '#f43f5e';
+      bullets.forEach(b => { ctx.fillRect(b.x, b.y, b.w, b.h); });
+
+      // Enemies
+      enemies.forEach(e => {
+        if(!e.alive) return;
+        ctx.fillStyle = e.color;
+        ctx.fillRect(e.x, e.y, e.w, e.h);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(e.x+4, e.y+4, 4, 4);
+        ctx.fillRect(e.x+e.w-8, e.y+4, 4, 4);
+      });
+
+      // Particles
+      particles.forEach(p => {
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, 2.5, 2.5);
+      });
+
+      requestAnimationFrame(() => { update(); render(); });
+    }
+    render();
+  </script>
+</body>
+</html>
